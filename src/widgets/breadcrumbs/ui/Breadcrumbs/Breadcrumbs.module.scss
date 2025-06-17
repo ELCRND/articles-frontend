@@ -1,0 +1,14 @@
+.breadcrumbs {
+  margin-bottom: rem(30);
+
+  & > ol {
+    display: flex;
+    align-items: center;
+    gap: rem(16);
+  }
+}
+
+.separator {
+  font-size: rem(32);
+  font-weight: 700;
+}

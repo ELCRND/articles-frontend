@@ -1,0 +1,16 @@
+.textField {
+  height: fit-content;
+
+  div {
+    border: 2px solid var(--color-green-alt);
+    border-radius: 0 0 16px 16px;
+    min-height: rem(240);
+    padding: 4px 12px;
+    outline: none;
+
+    p {
+      caret-color: var(--color-orange);
+      line-height: 110%;
+    }
+  }
+}

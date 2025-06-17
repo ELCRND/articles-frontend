@@ -1,0 +1,144 @@
+.container {
+  padding-top: rem(140);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(auto-fit, rem(46));
+  column-gap: rem(32);
+  row-gap: rem(32);
+
+  grid-template-areas:
+    "title aside"
+    "form aside"
+    "links aside"
+    "lang aside"
+    ". aside";
+
+  @include mobile {
+    position: relative;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "form"
+      "links"
+      "lang"
+      "aside";
+  }
+
+  form {
+    grid-area: form;
+  }
+}
+
+.title {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  gap: rem(32);
+  font-weight: 700;
+  font-size: rem(32);
+  color: var(--color-green-alt);
+
+  @include mobile {
+    text-align: center;
+  }
+}
+
+.sidebar {
+  grid-area: aside;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .upgradeBanner {
+    height: auto;
+
+    @include mobile {
+      position: absolute;
+      top: -16px;
+      left: 0;
+      translate: 0 -100%;
+    }
+  }
+
+  .qq {
+    display: block;
+    min-height: 124px;
+    background: #cdbbc9;
+    border: 1px solid #b33d01;
+    border-radius: 16px;
+  }
+}
+
+.links {
+  grid-area: links;
+  display: grid;
+  gap: rem(32);
+
+  @include tablet {
+    max-width: rem(464);
+    margin-top: rem(30);
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+
+  a {
+    width: 100%;
+    height: rem(72);
+    padding-inline: rem(24);
+    border: 2px solid #cdbbc9;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #b33d01 0%, #0e070d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+
+    @include mobile {
+      height: rem(48);
+      padding-inline: rem(32);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      place-content: center;
+      column-gap: 16px;
+    }
+
+    @include hover {
+      background-size: 330% 100%;
+      background-position-x: 50%;
+      filter: brightness(1.4);
+
+      path {
+        fill: var(--color-white);
+      }
+    }
+
+    path {
+      transition: 0.5s;
+    }
+
+    span {
+      font-weight: 700;
+      font-size: rem(20);
+      color: #fff;
+      text-wrap: nowrap;
+
+      @include mobile {
+        text-wrap: wrap;
+      }
+    }
+  }
+}
+
+.languages {
+  grid-area: lang;
+
+  @include mobile {
+    width: 100%;
+  }
+}

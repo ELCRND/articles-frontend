@@ -1,0 +1,85 @@
+.bold,
+.italic,
+.underline {
+  font-weight: 700;
+  font-size: rem(15);
+  color: var(--color-green-alt);
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.imageUpload {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  border-left: 1px solid var(--color-green-alt);
+  border-right: 1px solid var(--color-green-alt);
+
+  input {
+    display: none;
+  }
+}
+
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownButton {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-green-alt);
+  font-size: rem(15);
+  position: relative;
+}
+
+.arrow {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.dropdownList {
+  width: fit-content;
+  background-color: var(--color-black);
+  position: absolute;
+  top: 100%;
+  left: -73%;
+  right: 0;
+  border: 1px solid var(--color-green-alt);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  z-index: 10;
+}
+
+.dropdownItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+}
+
+.checkmark {
+  color: #0070f3;
+  font-weight: bold;
+
+  opacity: 0;
+
+  &.open {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,10 @@
+.toolbar {
+  display: flex;
+  gap: 16px;
+  padding: 0 rem(24);
+  border-top: 2px solid var(--color-green-alt);
+  border-left: 2px solid var(--color-green-alt);
+  border-right: 2px solid var(--color-green-alt);
+  border-radius: 16px 16px 0 0;
+  flex-wrap: wrap;
+}

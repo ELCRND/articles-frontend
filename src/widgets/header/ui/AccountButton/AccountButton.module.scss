@@ -1,0 +1,22 @@
+.accountButton {
+  @include flex-center;
+
+  svg {
+    translate: 0 -5%;
+  }
+
+  &:hover {
+    path {
+      fill: var(--color-green-alt);
+      transition: var(--transition-duration);
+    }
+  }
+
+  @include mobile {
+    svg {
+      width: rem(24);
+      height: rem(24);
+      translate: 0 -10%;
+    }
+  }
+}

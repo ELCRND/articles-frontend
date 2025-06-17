@@ -1,0 +1,19 @@
+@use "helpers" as *;
+
+:root {
+  --container-width: #{rem(1344)};
+  --container-padding-x: #{rem(32)};
+
+  --color-white: #ededed;
+  --color-black: #0e070d;
+  --color-black-alt: #292328;
+  --color-orange: #b33d01;
+  --color-pink: #ad9eaa;
+  --color-green: #7a854d;
+  --color-green-alt: #e3e7d4;
+  --color-blue: #3a6b90;
+  --color-purple: #5d4777;
+  --color-slate: #4a5d6b;
+
+  --transition-duration: 0.2s;
+}

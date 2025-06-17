@@ -1,0 +1,66 @@
+.menuButton {
+  &.open {
+    rotate: 45deg;
+
+    --dot-animation-type: ease;
+    --dot-animation-mode: forwards;
+    --dot-animation-time: 0.3s;
+
+    path {
+      &:nth-of-type(1) {
+        animation: dot-1 var(--dot-animation-time) var(--dot-animation-type)
+          var(--dot-animation-mode);
+      }
+
+      &:nth-of-type(3) {
+        animation: dot-3 var(--dot-animation-time) var(--dot-animation-type)
+          var(--dot-animation-mode);
+      }
+
+      &:nth-of-type(7) {
+        animation: dot-7 var(--dot-animation-time) var(--dot-animation-type)
+          var(--dot-animation-mode);
+      }
+
+      &:nth-of-type(9) {
+        animation: dot-9 var(--dot-animation-time) var(--dot-animation-type)
+          var(--dot-animation-mode);
+      }
+    }
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @include mobile {
+    svg {
+      width: rem(24);
+      height: rem(24);
+    }
+  }
+}
+
+@keyframes dot-1 {
+  to {
+    translate: 40% 40%;
+  }
+}
+
+@keyframes dot-3 {
+  to {
+    translate: -40% 40%;
+  }
+}
+
+@keyframes dot-7 {
+  to {
+    translate: 40% -40%;
+  }
+}
+
+@keyframes dot-9 {
+  to {
+    translate: -40% -40%;
+  }
+}

@@ -1,0 +1,42 @@
+@use "../scss/utils";
+@use "../scss/variables";
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-black);
+  font-family: "Anonymous Pro", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-white);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
+  // outline: 2px solid green;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  transition: var(--transition-duration);
+}
+
+ol,
+li {
+  list-style-type: none;
+}

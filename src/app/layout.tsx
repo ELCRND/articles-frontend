@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Anonymous_Pro } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "./globals.scss";
+import { Header } from "@/widgets/header/ui/Header/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const anonymousPro = Anonymous_Pro({
+  weight: ["400", "700"],
+  style: "normal",
+  variable: "--font-anonymous-pro",
 });
 
 export const metadata: Metadata = {
@@ -23,9 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="ru">
+      <body className={`${anonymousPro.variable}`}>
+        <Header />
         {children}
+        <ToastContainer />
       </body>
     </html>
   );
