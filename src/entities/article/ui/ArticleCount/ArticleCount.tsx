@@ -7,13 +7,14 @@ import { articleService } from "@/entities/article/api/article.service";
 import styles from "./ArticleCount.module.scss";
 
 type Props = {
-  count: number;
+  count?: number;
 };
 
 export const ArticleCount = ({ count }: Props) => {
   const [state, setState] = useState(count);
 
   useEffect(() => {
+    if (count) return;
     (async () => {
       setState(await articleService.getCount());
     })();

@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
 
-import { EyeIcon } from "@/shared/ui/EyeIcon/EyeIcon";
 import { GoogleIcon } from "@/shared/ui/GoogleIcon/GoogleIcon";
 import { YandexIcon } from "@/shared/ui/YandexIcon/YandexIcon";
+import { FormInput } from "@/shared/ui/Form/FormInput/FormInput";
+import { PasswordInput } from "@/shared/ui/PasswordInput/PasswordInput";
 import {
   registerSchema,
   RegisterFormData,
@@ -15,10 +16,9 @@ import {
 
 import styles from "./RegisterForm.module.scss";
 import { authService } from "../../api/auth.service";
-import { toast } from "react-toastify";
+import { OAuthButtons } from "@/shared/ui/OAuthButtons/OAuthButtons";
 
 export const RegisterForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -31,14 +31,16 @@ export const RegisterForm = () => {
     const { accept, ...registerData } = data;
     const res = await authService.register(registerData);
 
-    if (res)
+    if (res) {
       toast.success("Регистрация прошла успешно!", { position: "top-center" });
-
-    console.log(res);
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+      console.log(res);
+    } else {
+      toast.error("Ошибка сервера, попробуйте позже.", {
+        hideProgressBar: true,
+        className: styles.toast,
+        position: "bottom-right",
+      });
+    }
   };
 
   return (
@@ -50,83 +52,37 @@ export const RegisterForm = () => {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="example@gmail.com"
-            {...register("email")}
-            className={errors.email ? styles.errorInput : ""}
-          />
-          {errors.email && (
-            <span className={styles.errorMessage}>{errors.email.message}</span>
-          )}
-        </div>
+        <FormInput
+          label="Email"
+          id="email"
+          type="email"
+          placeholder="example@gmail.com"
+          error={errors.email?.message}
+          {...register("email")}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            placeholder="user"
-            {...register("username")}
-            className={errors.username ? styles.errorInput : ""}
-          />
-          {errors.username && (
-            <span className={styles.errorMessage}>
-              {errors.username.message}
-            </span>
-          )}
-        </div>
+        <FormInput
+          label="Username"
+          id="username"
+          type="text"
+          placeholder="user"
+          error={errors.username?.message}
+          {...register("username")}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="password">Password</label>
-          <div className={styles.passwordInputWrapper}>
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              {...register("password")}
-              className={errors.password ? styles.errorInput : ""}
-            />
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              className={styles.showPasswordButton}
-            >
-              <EyeIcon isVisible={showPassword} />
-            </button>
-          </div>
-          {errors.password && (
-            <span className={styles.errorMessage}>
-              {errors.password.message}
-            </span>
-          )}
-        </div>
+        <PasswordInput
+          label="Password"
+          id="password"
+          error={errors.password?.message}
+          {...register("password")}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="confirmPassword">Re-entry password</label>
-          <div className={styles.passwordInputWrapper}>
-            <input
-              id="confirmPassword"
-              type={showPassword ? "text" : "password"}
-              {...register("passwordRepeat")}
-              className={errors.passwordRepeat ? styles.errorInput : ""}
-            />
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              className={styles.showPasswordButton}
-            >
-              <EyeIcon isVisible={showPassword} />
-            </button>
-          </div>
-          {errors.passwordRepeat && (
-            <span className={styles.errorMessage}>
-              {errors.passwordRepeat.message}
-            </span>
-          )}
-        </div>
+        <PasswordInput
+          label="Re-entry password"
+          id="confirmPassword"
+          error={errors.passwordRepeat?.message}
+          {...register("passwordRepeat")}
+        />
 
         <button
           type="submit"
@@ -145,17 +101,7 @@ export const RegisterForm = () => {
           )}
         </div>
 
-        <div className={styles.oauth}>
-          <p className={styles.oauthTitle}>Войти с помощью</p>
-          <div className={styles.oauthButtons}>
-            <Link href="/auth/google" passHref className={styles.oauthButton}>
-              <GoogleIcon />
-            </Link>
-            <Link href="/auth/yandex" passHref className={styles.oauthButton}>
-              <YandexIcon />
-            </Link>
-          </div>
-        </div>
+        <OAuthButtons />
       </form>
     </div>
   );

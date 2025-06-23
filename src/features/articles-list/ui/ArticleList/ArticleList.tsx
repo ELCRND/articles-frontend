@@ -43,6 +43,13 @@ export const ArticleList = ({ data, children }: Props) => {
 
   return (
     <div className={`${styles.articles}`}>
+      {articles.length === 0 &&
+        (!query ? (
+          <div>Не удалось получить список статей. Ошибка сервера</div>
+        ) : (
+          <div>Нет статей с подхоядщим содержимым</div>
+        ))}
+
       {articles.map((article) => (
         <ArticleCard key={article._id} {...article} highlightQuery={query} />
       ))}
@@ -52,6 +59,7 @@ export const ArticleList = ({ data, children }: Props) => {
       {articles.length > 0 && !query && (
         <LoadMore loadMore={loadMoreArticles} />
       )}
+
       <ArticleIcons />
     </div>
   );

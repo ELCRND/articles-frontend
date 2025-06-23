@@ -1,0 +1,97 @@
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  display: flex;
+
+  &:has(:disabled) {
+    opacity: 0.2;
+    cursor: not-allowed;
+    & * {
+      &::file-selector-button {
+        cursor: not-allowed;
+      }
+      cursor: not-allowed;
+    }
+  }
+
+  @include mobile {
+    margin-bottom: rem(20);
+  }
+
+  label {
+    padding-left: rem(24);
+    font-weight: 700;
+    font-size: rem(15);
+    color: var(--color-orange);
+    overflow: hidden;
+  }
+
+  input {
+    width: 100%;
+    padding: rem(14) rem(24);
+    border: 2px solid #e3e7d4;
+    border-radius: 16px;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: rem(20);
+    color: var(--color-orange);
+
+    @include tablet {
+      font-size: rem(16);
+    }
+
+    @include mobile {
+      padding: rem(12) rem(24);
+    }
+  }
+}
+
+.errorInput {
+  border-color: #ff4d4f;
+}
+
+.errorMessage {
+  padding-left: rem(24);
+  color: #ff4d4f;
+  font-size: 0.875rem;
+}
+
+.previewContainer {
+  margin-bottom: rem(10);
+  display: flex;
+  justify-content: center;
+}
+
+.previewImage {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.input {
+  position: relative;
+  cursor: pointer;
+
+  &::file-selector-button {
+    // display: none;
+    position: absolute;
+    top: 50%;
+    right: rem(16);
+    translate: 0 -50%;
+    padding: rem(8) rem(16);
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-orange);
+    color: white;
+    font-weight: 700;
+    font-size: rem(14);
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    @include tablet {
+      font-size: rem(12);
+    }
+  }
+}

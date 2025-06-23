@@ -8,7 +8,11 @@ import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
 
 export const getExtensions = () => [
-  StarterKit,
+  StarterKit.configure({
+    bulletList: false,
+    orderedList: false,
+    listItem: false,
+  }),
   Underline,
   TextStyle,
   FontSizeExtension,

@@ -8,8 +8,10 @@ import { ItalicControl } from "../Controls/ItalicControl";
 import { UnderlineControl } from "../Controls/UnderlineControl";
 import { FontSizeControl } from "../Controls/FontSizeControl";
 import { ImageUploadControl } from "../Controls/ImageUploadControl";
+import { OrderListControl } from "../Controls/OrderListControl";
 
 import styles from "./Toolbar.module.scss";
+import { BulletListControl } from "../Controls/BulletListControl";
 
 type Props = {
   editor: Editor;
@@ -41,6 +43,12 @@ export function Toolbar({ editor }: Props) {
     }
   };
 
+  const handleOrderList = () =>
+    editor.chain().focus().toggleOrderedList().run();
+
+  const handleBulletList = () =>
+    editor.chain().focus().toggleBulletList().run();
+
   return (
     <div className={styles.toolbar}>
       <BoldControl handleCLick={handleBoldChange} />
@@ -53,14 +61,9 @@ export function Toolbar({ editor }: Props) {
 
       <ImageUploadControl handleChange={handleImageUpload} />
 
-      {/* Списки */}
-      <button onClick={() => editor.chain().focus().toggleBulletList().run()}>
-        list
-      </button>
+      <BulletListControl handleCLick={handleBulletList} />
 
-      <button onClick={() => editor.chain().focus().toggleOrderedList().run()}>
-        listO
-      </button>
+      <OrderListControl handleCLick={handleOrderList} />
     </div>
   );
 }

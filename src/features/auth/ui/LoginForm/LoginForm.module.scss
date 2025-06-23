@@ -43,39 +43,6 @@
   flex-direction: column;
 }
 
-.formGroup {
-  margin-bottom: rem(36);
-  display: flex;
-  flex-direction: column;
-  gap: rem(13);
-
-  @include mobile {
-    margin-bottom: rem(20);
-  }
-
-  label {
-    padding-left: rem(24);
-    font-weight: 700;
-    font-size: rem(15);
-    color: var(--color-orange);
-  }
-
-  input {
-    padding: rem(14) rem(24);
-    border: 2px solid #e3e7d4;
-    border-radius: 16px;
-    background-color: transparent;
-    font-weight: 700;
-    font-size: rem(20);
-    color: var(--color-green-alt);
-
-    @include mobile {
-      padding: rem(12) rem(24);
-      font-size: rem(16);
-    }
-  }
-}
-
 .errorInput {
   border-color: #ff4d4f;
 }
@@ -84,27 +51,6 @@
   padding-left: rem(24);
   color: #ff4d4f;
   font-size: 0.875rem;
-}
-
-.passwordInputWrapper {
-  position: relative;
-  display: flex;
-
-  input {
-    flex: 1;
-    padding-right: 3rem;
-  }
-}
-
-.showPasswordButton {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  translate: -80% -50%;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #1890ff;
 }
 
 .submitButton {
@@ -153,37 +99,8 @@
   }
 }
 
-.oauth {
-  padding-left: rem(24);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  @include mobile {
-    padding-left: 0;
-    flex-direction: column;
-    gap: 13px;
-  }
-}
-
-.oauthTitle {
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--color-orange);
-}
-
-.oauthButtons {
-  display: flex;
-  align-items: center;
-  gap: rem(16);
-
-  @include mobile {
-    gap: 40px;
-  }
-}
-
-.oauthButton {
-  &:hover {
-    opacity: 0.75;
-  }
+.toast {
+  background-color: var(--color-pink);
+  color: var(--color-black);
+  font-size: rem(16);
 }

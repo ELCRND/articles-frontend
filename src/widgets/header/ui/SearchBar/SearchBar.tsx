@@ -1,16 +1,25 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 import styles from "./SearchBar.module.scss";
 
 export const SearchBar = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const query = formData.get("querySearchBar");
+
+    console.log(pathname);
+
+    if (pathname !== "/") {
+      router.push(`/?q=${query}`);
+      return;
+    }
 
     window.history.replaceState(null, "", `/?q=${query}`);
   };

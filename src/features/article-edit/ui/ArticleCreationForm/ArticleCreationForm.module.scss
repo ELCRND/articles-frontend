@@ -1,0 +1,41 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: rem(36);
+  column-gap: rem(68);
+  padding-bottom: 200px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editor {
+  grid-column: 1 / 3;
+
+  @include mobile {
+    grid-column: 1 / 2;
+  }
+}
+
+.submitButton {
+  @include flex-center;
+  grid-column: 2 / 3;
+  width: 100%;
+  height: rem(55);
+  margin-top: rem(23);
+  border: 2px solid var(--color-green-alt);
+  border-radius: 16px;
+  background-color: var(--color-pink);
+  font-weight: 400;
+  font-size: rem(20);
+  color: #000;
+
+  @include tablet {
+    height: rem(50);
+  }
+
+  @include mobile {
+    grid-column: 1 / 2;
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { ChangeInfo } from "@/features/user/ui/ChangeInfo/ChangeInfo";
 import { ChangeLanguage } from "@/features/user/ui/ChangeLanguage/ChangeLanguage";
@@ -8,7 +9,6 @@ import { UpgradeBanner } from "@/shared/ui/UpgradeBanner/UpgradeBanner";
 import { LogoutIcon } from "@/shared/ui/LogoutIcon/LogoutIcon";
 
 import styles from "./Profile.module.scss";
-import { useRouter } from "next/navigation";
 
 export const Profile = () => {
   const router = useRouter();
@@ -49,7 +49,7 @@ export const Profile = () => {
             />
           </svg>
         </Link>
-        <Link href={""}>
+        <Link href={"/profile/my-articles"}>
           <span>Мои статьи</span>
           <svg
             width="44"

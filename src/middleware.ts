@@ -8,9 +8,13 @@ export async function middleware(request: NextRequest) {
   const refreshToken = request.cookies.get("refresh_token")?.value;
   const response = NextResponse.next();
 
+  console.log("middleware start", pathname);
+
   // try refresh token
   if (!accessToken && refreshToken) {
+    console.log("has refresh, no access");
     try {
+      console.log("try refresh");
       const refreshResponse = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/auth/refresh`,
         {
@@ -25,6 +29,7 @@ export async function middleware(request: NextRequest) {
       );
 
       if (!refreshResponse.ok) {
+        console.log("delete refresh");
         const res = NextResponse.next();
         res.cookies.delete("refresh_token");
 
@@ -32,6 +37,7 @@ export async function middleware(request: NextRequest) {
       }
       const setCookieHeader = refreshResponse.headers.get("Set-Cookie");
       if (setCookieHeader) {
+        console.log("refresh success, set refresh");
         response.headers.set("Set-Cookie", setCookieHeader);
       }
 
@@ -41,37 +47,49 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  //  redirect from /auth if has access && access verify
   if (accessToken && pathname.startsWith("/auth")) {
+    console.log("get ./auth, access has");
     try {
       const verifyResponse = await verifyToken(accessToken);
 
       if (verifyResponse.ok) {
+        console.log("access true, redirect to profile");
         const profileUrl = new URL("/profile", request.url);
         return NextResponse.redirect(profileUrl);
       } else {
+        console.log("access false, access and refressh delete");
         response.cookies.delete("access_token");
+        response.cookies.delete("refresh_token");
       }
     } catch (error) {
       console.error("Token verification failed:", error);
     }
   }
 
+  // protected
   if (pathname.startsWith("/profile")) {
+    console.log("try get protected /profile");
     if (!accessToken) {
-      // Если нет access token, перенаправляем на страницу входа
-      const authUrl = new URL("/auth/login", request.url);
+      console.log("no access, redirect to auth");
+      const authUrl = new URL("/auth", request.url);
       return NextResponse.redirect(authUrl);
     }
 
     try {
+      console.log("has access, try verify");
       const verifyResponse = await verifyToken(accessToken);
 
       if (!verifyResponse.ok) {
+        console.log("verify false, redirect to auth");
         // Если токен невалиден, перенаправляем на страницу входа
         const authUrl = new URL("/auth", request.url);
         response.cookies.delete("access_token");
         return NextResponse.redirect(authUrl);
       }
+
+      console.log("access verify true");
+      return response;
     } catch (error) {
       console.error("Token verification failed:", error);
       const authUrl = new URL("/auth/login", request.url);
@@ -93,18 +111,22 @@ export async function middleware(request: NextRequest) {
   }
 
   // public roytes
-  const isPublicRoute = ["/auth"].includes(pathname);
+  const isPublicRoute = ["/auth", "/"].includes(pathname);
   if (isPublicRoute) {
+    console.log("is public", pathname);
     return response;
   }
 
   if (accessToken) {
+    console.log("has access, verify not required");
     return response;
   }
 
   // redirect
   const loginUrl = new URL("/auth", request.url);
   loginUrl.searchParams.set("from", request.nextUrl.pathname);
+
+  console.log("final redirect, no tokens");
   return NextResponse.redirect(loginUrl);
 }
 
