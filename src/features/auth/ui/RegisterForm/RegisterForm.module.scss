@@ -42,6 +42,10 @@
   flex-direction: column;
 }
 
+.input {
+  margin-bottom: rem(36);
+}
+
 .errorMessage {
   padding-left: rem(24);
   color: #ff4d4f;

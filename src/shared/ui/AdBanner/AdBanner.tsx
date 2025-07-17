@@ -25,6 +25,7 @@ export const AdBanner = ({ children, type, position, image }: Props) => {
           fill
           sizes="100%"
           className={styles.imageBg}
+          priority
         />
       )}
     </Link>

@@ -1,5 +1,7 @@
 import styles from "./HighlightText.module.scss";
 
+import { useMemo } from "react";
+
 const escapeRegExp = (string: string) => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 };
@@ -29,4 +31,21 @@ export const HighlightText = ({
       )}
     </>
   );
+};
+
+export const HTMLHighlightText = ({
+  html,
+  query,
+}: {
+  html: string;
+  query?: string | null;
+}) => {
+  const highlightedHtml = useMemo(() => {
+    if (!query) return html;
+
+    const regex = new RegExp(`(${escapeRegExp(query)})`, "gi");
+    return html.replace(regex, '<span class="highlight">$1</span>');
+  }, [html, query]);
+
+  return <div dangerouslySetInnerHTML={{ __html: highlightedHtml }} />;
 };

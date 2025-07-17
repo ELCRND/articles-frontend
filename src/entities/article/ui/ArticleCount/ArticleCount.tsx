@@ -8,9 +8,10 @@ import styles from "./ArticleCount.module.scss";
 
 type Props = {
   count?: number;
+  className?: string;
 };
 
-export const ArticleCount = ({ count }: Props) => {
+export const ArticleCount = ({ count, className }: Props) => {
   const [state, setState] = useState(count);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export const ArticleCount = ({ count }: Props) => {
     })();
   }, []);
   return (
-    <div className={styles.counter}>
+    <div className={`${styles.counter} ${className}`}>
       <span className={styles.text}>Все статьи</span>
       <span className={styles.count}> + {state}</span>
     </div>

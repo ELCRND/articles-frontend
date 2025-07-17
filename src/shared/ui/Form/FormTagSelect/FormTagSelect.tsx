@@ -39,7 +39,7 @@ export const FormTagSelect = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [focusedIndex, setFocusedIndex] = useState(-1);
+  // const [focusedIndex, setFocusedIndex] = useState(-1);
   const selectRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -89,6 +89,7 @@ export const FormTagSelect = ({
   // }, [focusedIndex, isOpen]);
 
   const handleToggleOption = (optionValue: string) => {
+    console.log(value);
     if (value.includes(optionValue)) {
       onChange(value.filter((v) => v !== optionValue));
     } else if (canAddMore) {
@@ -140,7 +141,6 @@ export const FormTagSelect = ({
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
-                  setFocusedIndex(0);
                 }}
                 className={styles.search}
               />
@@ -167,7 +167,6 @@ export const FormTagSelect = ({
                         onClick={() =>
                           canSelect && handleToggleOption(option.value)
                         }
-                        onMouseEnter={() => setFocusedIndex(index)}
                       >
                         {option.label}
                         {!canSelect && !isSelected && (

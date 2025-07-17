@@ -1,0 +1,98 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+
+  height: 100%;
+  max-height: rem(116);
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar-thumb {
+    background: #e3e7d4;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar {
+    width: rem(8);
+    border-radius: 4px;
+    background: rgba(227, 231, 212, 0.5);
+  }
+
+  &::-moz-scrollbar-thumb {
+    background: #e3e7d4;
+    border-radius: 4px;
+  }
+
+  &::-moz-scrollbar {
+    width: rem(8);
+    border-radius: 4px;
+    background: rgba(227, 231, 212, 0.5);
+  }
+}
+
+.filter__item {
+  font-weight: 700;
+  font-size: rem(16);
+  color: #e3e7d4;
+
+  &:has(:disabled) {
+    opacity: 0.7;
+
+    label {
+      cursor: default;
+    }
+  }
+
+  input {
+    display: none;
+
+    &:checked + label > .filter__checkbox {
+      border-color: var(--color-green);
+
+      &:before {
+        background-color: var(--color-green);
+      }
+    }
+  }
+
+  label {
+    display: flex;
+    gap: rem(8);
+    align-items: flex-end;
+    cursor: pointer;
+  }
+
+  .filter__checkbox {
+    width: rem(16);
+    height: rem(16);
+    background-color: var(--color-green-alt);
+    border: 1px solid transparent;
+    position: relative;
+
+    &::before {
+      content: "";
+      @include abs-center;
+      width: rem(8);
+      height: rem(8);
+      background-color: transparent;
+    }
+  }
+}
+
+.label {
+  margin-bottom: rem(13);
+  padding-right: rem(12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: rem(16);
+  color: #e3e7d4;
+  cursor: pointer;
+
+  &.open {
+    svg {
+      rotate: 180deg;
+    }
+  }
+}

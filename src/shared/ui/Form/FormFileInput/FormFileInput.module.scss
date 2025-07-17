@@ -1,7 +1,7 @@
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: rem(8);
+  gap: rem(13);
   display: flex;
 
   &:has(:disabled) {
@@ -75,7 +75,7 @@
   cursor: pointer;
 
   &::file-selector-button {
-    // display: none;
+    display: none;
     position: absolute;
     top: 50%;
     right: rem(16);

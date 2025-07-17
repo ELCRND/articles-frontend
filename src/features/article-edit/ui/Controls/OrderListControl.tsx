@@ -6,7 +6,7 @@ type Props = {
 
 export const OrderListControl = ({ handleCLick }: Props) => {
   return (
-    <button onClick={handleCLick} className={styles.order}>
+    <button onClick={handleCLick} className={styles.order} type="button">
       <svg
         width="24"
         height="24"

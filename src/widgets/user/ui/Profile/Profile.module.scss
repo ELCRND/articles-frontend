@@ -1,5 +1,5 @@
 .container {
-  padding-top: rem(140);
+  padding-top: rem(90);
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: repeat(auto-fit, rem(46));
@@ -7,7 +7,8 @@
   row-gap: rem(32);
 
   grid-template-areas:
-    "title aside"
+    "counter ."
+    "title ."
     "form aside"
     "links aside"
     "lang aside"
@@ -28,6 +29,22 @@
   form {
     grid-area: form;
   }
+
+  .profileCounter {
+    grid-area: counter;
+
+    @include tablet {
+      justify-self: start;
+      position: relative;
+    }
+
+    @include mobile {
+      position: absolute;
+      top: 0;
+      translate: 0 187%;
+      right: 24px;
+    }
+  }
 }
 
 .title {
@@ -39,9 +56,21 @@
   font-size: rem(32);
   color: var(--color-green-alt);
 
-  @include mobile {
+  @include tablet {
     text-align: center;
     font-size: rem(20);
+  }
+
+  @include mobile {
+    width: 100%;
+    max-width: rem(464);
+    flex-direction: column;
+    gap: 0;
+
+    button {
+      scale: 0.7;
+      align-self: end;
+    }
   }
 }
 
@@ -60,14 +89,6 @@
       left: 0;
       translate: 0 -100%;
     }
-  }
-
-  .qq {
-    display: block;
-    min-height: 124px;
-    background: #cdbbc9;
-    border: 1px solid #b33d01;
-    border-radius: 16px;
   }
 }
 

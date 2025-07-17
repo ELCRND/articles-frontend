@@ -1,12 +1,16 @@
+import { JSONContent } from "@tiptap/react";
+
 export interface IArticle {
   _id: string;
   title: string;
-  content: string;
+  content: JSONContent;
+  plainText: string;
   image?: string;
   views: number;
   comments: number;
   readingTime: number;
-  publishedAt?: string;
+  publishedAt: string;
+  createdAt: string;
   author: {
     id: string;
     username: string;
@@ -17,6 +21,11 @@ export interface IArticle {
   theme: `${ArticleTheme}`;
   subtheme: `${ArticleSubtheme}`;
 }
+
+export type ArticlePreview = Pick<
+  IArticle,
+  "_id" | "title" | "author" | "createdAt"
+>;
 
 export enum ArticleCategory {
   TECHNOLOGY = "Технолигии",
@@ -217,15 +226,15 @@ export enum ArticleSubtheme {
   PERSONAL_GROWTH = "Саморазвитие",
 }
 // Тип для ответа API
-export interface ArticlesResponse {
+export type ArticlesResponse = {
   data: IArticle[];
   total: number;
   page: number;
   limit: number;
-}
+};
 
-export interface CreateArticleDto {
-  title: string;
+export type CreateArticleDto = {
+  articleName: string;
   content: string;
   image?: string;
   category: ArticleCategory;
@@ -234,5 +243,5 @@ export interface CreateArticleDto {
   tags?: ArticleTag[];
   readingTime?: number;
   published?: boolean;
-  authorId: string;
-}
+  authorId?: string;
+};

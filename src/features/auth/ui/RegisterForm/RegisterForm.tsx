@@ -33,13 +33,6 @@ export const RegisterForm = () => {
 
     if (res) {
       toast.success("Регистрация прошла успешно!", { position: "top-center" });
-      console.log(res);
-    } else {
-      toast.error("Ошибка сервера, попробуйте позже.", {
-        hideProgressBar: true,
-        className: styles.toast,
-        position: "bottom-right",
-      });
     }
   };
 
@@ -59,6 +52,7 @@ export const RegisterForm = () => {
           placeholder="example@gmail.com"
           error={errors.email?.message}
           {...register("email")}
+          className={styles.input}
         />
 
         <FormInput
@@ -68,6 +62,7 @@ export const RegisterForm = () => {
           placeholder="user"
           error={errors.username?.message}
           {...register("username")}
+          className={styles.input}
         />
 
         <PasswordInput
@@ -75,6 +70,7 @@ export const RegisterForm = () => {
           id="password"
           error={errors.password?.message}
           {...register("password")}
+          className={styles.input}
         />
 
         <PasswordInput
@@ -82,6 +78,7 @@ export const RegisterForm = () => {
           id="confirmPassword"
           error={errors.passwordRepeat?.message}
           {...register("passwordRepeat")}
+          className={styles.input}
         />
 
         <button

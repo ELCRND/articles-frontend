@@ -1,0 +1,48 @@
+.container {
+  min-width: rem(320);
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+}
+
+.form {
+  padding: rem(16) rem(24);
+  border-radius: 8px;
+  background: #292328;
+}
+
+.title {
+  margin-bottom: rem(32);
+  text-align: center;
+  font-weight: 700;
+  font-size: rem(20);
+  color: #e3e7d4;
+}
+
+.filtersList {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+}
+
+.reset,
+.apply {
+  @include flex-center;
+  height: rem(32);
+  border-radius: 8px;
+  background: #292328;
+  font-weight: 400;
+  font-size: rem(16);
+  text-align: center;
+  color: #b33d01;
+
+  &:active {
+    box-shadow: 0 0 6px #3d3d3d inset;
+  }
+}
+
+.apply {
+  height: rem(40);
+  font-weight: 700;
+  color: var(--color-green);
+}

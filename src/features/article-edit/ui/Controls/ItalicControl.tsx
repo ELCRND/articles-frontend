@@ -6,7 +6,7 @@ type Props = {
 
 export const ItalicControl = ({ handleCLick }: Props) => {
   return (
-    <button onClick={handleCLick} className={styles.italic}>
+    <button onClick={handleCLick} className={styles.italic} type="button">
       I
     </button>
   );

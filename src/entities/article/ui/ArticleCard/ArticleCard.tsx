@@ -1,19 +1,27 @@
 import Link from "next/link";
 
-import { HighlightText } from "@/shared/ui/HighlightText/HighlightText";
+import {
+  HighlightText,
+  HTMLHighlightText,
+} from "@/shared/ui/HighlightText/HighlightText";
 
 import { ArticleCategory, ArticleTag, IArticle } from "../../model/types";
 
 import styles from "./ArticleCard.module.scss";
+import { useMemo } from "react";
+import { generateHTML } from "@tiptap/react";
+import { getExtensions } from "@/features/article-edit/config/tiptapExtensions";
 
 interface Props extends IArticle {
   highlightQuery?: string | null;
+  formattedContent?: string;
 }
 
 export const ArticleCard = ({
   _id,
   title,
   content,
+  plainText,
   author,
   tags,
   readingTime,
@@ -23,6 +31,7 @@ export const ArticleCard = ({
   category,
   image,
   highlightQuery,
+  formattedContent,
 }: Props) => {
   return (
     <article className={`${styles.article} ${styles.article}--${category}`}>
@@ -67,9 +76,16 @@ export const ArticleCard = ({
           <span>{comments}</span>
         </div>
       </div>
-      <p className={styles.article__text}>
-        <HighlightText text={content} query={highlightQuery} />
+      <p className={styles.article__textSsr}>
+        {/* <HighlightText text={text || ""} query={highlightQuery} /> */}
+        {plainText}
       </p>
+
+      <div className={styles.article__text}>
+        {formattedContent && (
+          <HTMLHighlightText html={formattedContent} query={highlightQuery} />
+        )}
+      </div>
       <Link href={`/articles/${_id}`} className={styles.article__readMore}>
         Читать далее
       </Link>

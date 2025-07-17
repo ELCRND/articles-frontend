@@ -1,5 +1,6 @@
 .counter {
   width: fit-content;
+  min-height: rem(72);
   padding: rem(18) rem(24);
   background-color: var(--color-orange);
   border: 2px solid var(--color-black);
@@ -8,6 +9,7 @@
   @include tablet {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
+    min-height: auto;
     padding: rem(10) rem(14);
     justify-self: end;
     height: fit-content;
@@ -19,6 +21,7 @@
     border-radius: 8px;
     display: flex;
     text-wrap: nowrap;
+    translate: 0 -2px;
   }
 }
 

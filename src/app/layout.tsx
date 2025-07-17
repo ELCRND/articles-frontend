@@ -3,11 +3,13 @@ import { Anonymous_Pro } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "./globals.scss";
 import { Header } from "@/widgets/header/ui/Header/Header";
+import { Suspense } from "react";
 
 const anonymousPro = Anonymous_Pro({
   weight: ["400", "700"],
   style: "normal",
   variable: "--font-anonymous-pro",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -21,12 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={`${anonymousPro.variable}`}>
-        <Header />
-        {children}
-        <ToastContainer />
-      </body>
-    </html>
+    <Suspense>
+      <html lang="ru">
+        <body className={`${anonymousPro.variable}`}>
+          <Header />
+          {children}
+          <ToastContainer />
+        </body>
+      </html>
+    </Suspense>
   );
 }

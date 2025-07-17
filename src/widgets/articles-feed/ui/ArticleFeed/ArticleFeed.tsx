@@ -16,7 +16,7 @@ type Props = {
 export const ArticleFeed = ({ data }: Props) => {
   return (
     <section className={`container ${styles.articlesFeed}`}>
-      <ArticleCount count={data.length} />
+      <ArticleCount />
 
       <ArticleList data={data}>
         <AdBanner

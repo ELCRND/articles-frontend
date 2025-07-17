@@ -10,3 +10,33 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.highlight {
+  background-color: #ffeb3b;
+}
+
+.list-disc {
+  list-style: disc !important;
+  padding-left: rem(20);
+
+  li {
+    list-style: disc !important;
+    text-indent: 0.3em;
+  }
+}
+
+.list-decimal {
+  list-style: decimal !important;
+  padding-left: rem(20);
+  counter-reset: list-counter;
+
+  li {
+    list-style: decimal !important;
+    counter-increment: list-counter;
+    text-indent: 0.3em;
+
+    &::marker {
+      content: counter(list-counter) "." !important;
+    }
+  }
+}

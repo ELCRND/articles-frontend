@@ -9,6 +9,10 @@
   font-weight: 700;
   font-size: rem(20);
   color: var(--color-green-alt);
+
+  @include mobile {
+    font-size: rem(12);
+  }
 }
 
 .empty {
@@ -16,6 +20,10 @@
   font-weight: 700;
   font-size: rem(16);
   color: var(--color-orange);
+
+  @include mobile {
+    font-size: rem(12);
+  }
 }
 
 .selectedTags {

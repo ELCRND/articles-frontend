@@ -1,0 +1,21 @@
+.link {
+  @include flex-center;
+  height: 100%;
+  padding-left: rem(64);
+  padding-right: rem(48);
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: rem(48);
+  color: #000;
+
+  @include mobile {
+    padding-left: rem(24);
+    padding-right: rem(24);
+    font-size: rem(32);
+
+    svg {
+      width: 50px;
+      min-width: 50px;
+    }
+  }
+}

@@ -3,6 +3,10 @@
   font-weight: 700;
   font-size: rem(32);
   color: var(--color-green-alt);
+
+  @include mobile {
+    font-size: rem(14);
+  }
 }
 
 .link {

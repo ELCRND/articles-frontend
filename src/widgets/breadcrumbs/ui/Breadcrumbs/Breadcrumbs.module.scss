@@ -11,4 +11,8 @@
 .separator {
   font-size: rem(32);
   font-weight: 700;
+
+  @include mobile {
+    font-size: rem(14);
+  }
 }

@@ -31,13 +31,20 @@ export const LoginForm = () => {
     try {
       const user = await authService.login(data);
 
-      user
-        ? router.replace("/profile")
-        : toast.error("Ошибка сервера, попробуйте позже.", {
-            hideProgressBar: true,
-            className: styles.toast,
-            position: "bottom-right",
-          });
+      if (!user) {
+        toast.error("Ошибка сервера, попробуйте позже.", {
+          hideProgressBar: true,
+          className: styles.toast,
+          position: "bottom-right",
+        });
+        return;
+      }
+
+      if (user.role === "ADMIN") {
+        router.replace("/admin/dashboard");
+      } else {
+        router.replace("/profile");
+      }
     } catch (error) {
       console.error("Ошибка входа:", error);
     }
@@ -59,6 +66,8 @@ export const LoginForm = () => {
           placeholder="example@gmail.com"
           error={errors.email?.message}
           {...register("email")}
+          className={styles.input}
+          defaultValue={"admin@mail.com"}
         />
 
         <PasswordInput
@@ -66,6 +75,8 @@ export const LoginForm = () => {
           id="password"
           error={errors.password?.message}
           {...register("password")}
+          className={styles.input}
+          defaultValue={"Admin123"}
         />
 
         <button

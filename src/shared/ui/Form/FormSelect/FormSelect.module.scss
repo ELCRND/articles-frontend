@@ -1,7 +1,7 @@
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: rem(13);
   position: relative;
   width: 100%;
 
@@ -22,7 +22,7 @@
   justify-content: space-between;
   align-items: center;
   padding: rem(14) rem(24);
-  border: 2px solid #e3e7d4;
+  border: 2px solid var(--color-green-alt);
   border-radius: 16px;
   background-color: transparent;
   font-weight: 700;
@@ -69,10 +69,6 @@
   @include tablet {
     top: rem(43);
   }
-
-  // @include mobile {
-  //   top: rem(43);
-  // }
 }
 
 .dropdownList {
@@ -114,11 +110,17 @@
     }
   }
 }
+
 .errorMessage {
   padding-left: rem(24);
-  color: #ff4d4f;
-  font-size: 0.875rem;
+  color: var(--color-red);
+  font-size: rem(14);
   position: absolute;
   bottom: 0;
   translate: 0 150%;
+
+  @include mobile {
+    font-size: rem(10);
+    translate: 0 120%;
+  }
 }

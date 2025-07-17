@@ -6,7 +6,7 @@ type Props = {
 
 export const BoldControl = ({ handleCLick }: Props) => {
   return (
-    <button onClick={handleCLick} className={styles.bold}>
+    <button onClick={handleCLick} className={styles.bold} type="button">
       B
     </button>
   );

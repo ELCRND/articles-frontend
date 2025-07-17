@@ -27,8 +27,13 @@
   }
 
   @include mobile {
-    width: auto;
+    width: 85%;
     padding-inline: rem(30);
+  }
+
+  @include mobile-s {
+    width: 80%;
+    text-wrap: nowrap;
   }
 }
 

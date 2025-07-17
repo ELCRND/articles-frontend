@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { IUser, LoginDto, RegisterDto, Tokens } from "../model/types";
 
 class AuthService {
@@ -75,7 +76,7 @@ class AuthService {
     try {
       const res = await fetch(`${this.baseURL}/refresh`, {
         method: "POST",
-        headers: this.getHeaders(),
+        headers: this.getHeaders(refreshToken),
         body: JSON.stringify({ refreshToken }),
         credentials: "include",
       });
@@ -134,6 +135,13 @@ class AuthService {
     try {
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
+        if (errorData.message && typeof window != undefined) {
+          toast.error(errorData.message, {
+            hideProgressBar: true,
+            position: "bottom-right",
+          });
+        }
+
         throw new Error(errorData.message || `HTTP Error: ${res.status}`);
       }
       return await res.json();

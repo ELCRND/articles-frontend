@@ -1,6 +1,7 @@
 .article {
   grid-column: 1 / 2;
   max-width: rem(1016);
+  flex-shrink: 0;
   min-height: rem(280);
   padding: rem(32) rem(24) rem(24) rem(24);
   border: 2px solid var(--color-green-alt);
@@ -142,6 +143,14 @@
     line-clamp: 12;
     -webkit-line-clamp: 12;
   }
+
+  > div > p {
+    margin-bottom: rem(10);
+  }
+}
+
+.article__textSsr {
+  @include visually-hidden;
 }
 
 .article__readMore {

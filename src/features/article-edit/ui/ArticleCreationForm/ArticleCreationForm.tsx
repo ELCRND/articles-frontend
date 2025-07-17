@@ -3,8 +3,11 @@
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { ArticleEditor } from "../ArticleEditor/ArticleEditor";
 import { FormInput } from "@/shared/ui/Form/FormInput/FormInput";
 import { FormFileInput } from "@/shared/ui/Form/FormFileInput/FormFileInput";
+import { FormSelect } from "@/shared/ui/Form/FormSelect/FormSelect";
+import { FormTagSelect } from "@/shared/ui/Form/FormTagSelect/FormTagSelect";
 
 import {
   ArticleCategory,
@@ -17,13 +20,10 @@ import {
   createArticleSchema,
 } from "@/shared/lib/zod/create-article-validation-schemas";
 
-import { ArticleEditor } from "../ArticleEditor/ArticleEditor";
-
 import { getSelectOptionsFromEnum } from "../../lib/utils";
 
 import styles from "./ArticleCreationForm.module.scss";
-import { FormSelect } from "@/shared/ui/Form/FormSelect/FormSelect";
-import { FormTagSelect } from "@/shared/ui/Form/FormTagSelect/FormTagSelect";
+import { articleService } from "@/entities/article/api/article.service";
 const durationOptions = [
   { value: "10", label: "10 дней" },
   { value: "30", label: "30 дней" },
@@ -42,29 +42,43 @@ export const ArticleCreationForm = () => {
   } = useForm<CreateArticleFormData>({
     resolver: zodResolver(createArticleSchema),
     defaultValues: {
-      articleName: "",
+      title: "",
       email: "",
       category: "",
       theme: "",
       subtheme: "",
+      content: {},
       duration: "",
       tags: [],
     },
   });
 
-  // const [selectedTags, setSelectedTags] = useState<ArticleTag[]>([]);
+  console.log(errors);
 
   const onSubmit = async (data: CreateArticleFormData) => {
     console.log(data, "!");
     try {
-      //   const user = await authService.login(data);
-      //   user
-      //     ? router.replace("/profile")
-      //     : toast.error("Ошибка сервера, попробуйте позже.", {
-      //         hideProgressBar: true,
-      //         className: styles.toast,
-      //         position: "bottom-right",
-      //       });
+      const formData = new FormData();
+
+      //  formData.append('title', data.articleName);
+      //   formData.append('email', data.email);
+      //   formData.append('category', data.category);
+      //   formData.append('theme', data.theme);
+      //   formData.append('subtheme', data.subtheme);
+      //   formData.append('duration', data.duration);
+      //   formData.append('tags', JSON.stringify(data.tags));
+      //   formData.append('content', JSON.stringify(data.content));
+
+      const response = await articleService.createArticle({
+        ...data,
+        image: "",
+      });
+
+      // if (!response.ok) {
+      //   throw new Error('Ошибка при создании статьи');
+      // }
+
+      // const result = await response.json();
     } catch (error) {
       console.error("Ошибка при создании статьи:", data, error);
     }
@@ -74,11 +88,11 @@ export const ArticleCreationForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <FormInput
         label="Название статьи *"
-        id="articleName"
+        id="title"
         type="text"
         placeholder="Добавить название"
-        error={errors.articleName?.message}
-        {...register("articleName")}
+        error={errors.title?.message}
+        {...register("title")}
       />
       <FormInput
         label="Email *"
@@ -143,15 +157,21 @@ export const ArticleCreationForm = () => {
       <FormFileInput
         disabled
         label="Загрузить изображение"
-        id="image"
+        // id="image"
         error={errors.image?.message?.toString()}
-        preview={
-          watch("image")?.[0] ? URL.createObjectURL(watch("image")[0]) : null
-        }
-        {...register("image")}
+        // preview={
+        //   watch("image")?.[0] ? URL.createObjectURL(watch("image")[0]) : null
+        // }
+        // {...register("image")}
       />
 
-      <ArticleEditor className={styles.editor} />
+      <Controller
+        name="content"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <ArticleEditor onChange={onChange} className={styles.editor} />
+        )}
+      />
 
       <Controller
         name="tags"
@@ -187,15 +207,6 @@ export const ArticleCreationForm = () => {
           />
         )}
       />
-
-      {/* <FormDurationSelect
-        options={durationOptions}
-        selectedValue={selectedDuration}
-        onSelect={setSelectedDuration}
-        label="Срок размещения *"
-        error={errors.duration?.message}
-        placeholder="Выберите срок размещения"
-      /> */}
 
       <button className={styles.submitButton}>
         Предоставить на рассмотрение

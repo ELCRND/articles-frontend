@@ -10,7 +10,7 @@ export const ImageUploadControl = ({ handleChange }: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <div className={styles.imageUpload}>
-      <button onClick={() => fileInputRef.current?.click()}>
+      <button onClick={() => fileInputRef.current?.click()} type="button">
         <svg
           width="10"
           height="18"

@@ -31,8 +31,7 @@ export const FontSizeControl = ({
       <button
         className={styles.dropdownButton}
         onClick={toggleDropdown}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
+        type="button"
       >
         <span>A</span>
         <span className={styles.arrow}>{isOpen ? "▲" : "▼"}</span>

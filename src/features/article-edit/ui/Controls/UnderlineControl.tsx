@@ -6,7 +6,7 @@ type Props = {
 
 export const UnderlineControl = ({ handleCLick }: Props) => {
   return (
-    <button onClick={handleCLick} className={styles.underline}>
+    <button onClick={handleCLick} className={styles.underline} type="button">
       U
     </button>
   );

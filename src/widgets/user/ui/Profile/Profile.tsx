@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import { ReadNowArticles } from "@/widgets/read-now-articles/ui/ReadNowArticles/ReadNowArticles";
 import { ChangeInfo } from "@/features/user/ui/ChangeInfo/ChangeInfo";
 import { ChangeLanguage } from "@/features/user/ui/ChangeLanguage/ChangeLanguage";
 import { logout } from "@/features/auth/api/auth-server-actions";
@@ -9,11 +10,14 @@ import { UpgradeBanner } from "@/shared/ui/UpgradeBanner/UpgradeBanner";
 import { LogoutIcon } from "@/shared/ui/LogoutIcon/LogoutIcon";
 
 import styles from "./Profile.module.scss";
+import { ArticleCount } from "@/entities/article/ui/ArticleCount/ArticleCount";
 
 export const Profile = () => {
   const router = useRouter();
   return (
     <section className={`container ${styles.container}`}>
+      <ArticleCount className={styles.profileCounter} />
+
       <div className={styles.title}>
         <h1>Приветствуем Вас!</h1>
         <button
@@ -29,8 +33,7 @@ export const Profile = () => {
       <ChangeInfo />
       <aside className={styles.sidebar}>
         <UpgradeBanner className={styles.upgradeBanner} />
-        <div className={styles.qq}>123</div>
-        <div className={styles.qq}></div>
+        <ReadNowArticles />
       </aside>
 
       <div className={styles.links}>

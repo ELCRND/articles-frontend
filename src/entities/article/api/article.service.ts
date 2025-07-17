@@ -1,4 +1,4 @@
-import { CreateArticleDto, IArticle } from "../model/types";
+import { ArticlePreview, CreateArticleDto, IArticle } from "../model/types";
 
 class ArticleService {
   private baseURL = "";
@@ -42,7 +42,23 @@ class ArticleService {
     }
   }
 
-  public async createArticle(data: CreateArticleDto): Promise<IArticle | null> {
+  public async getReadNowArticles(): Promise<IArticle[]> {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/viewers`,
+        {
+          headers: this.getHeaders(),
+        }
+      );
+
+      return this.handleResponse<IArticle[]>(res);
+    } catch (e) {
+      console.error(`Failed fetch: ${e}`);
+      return [];
+    }
+  }
+
+  public async createArticle(data: any): Promise<IArticle | null> {
     try {
       const res = await fetch(`${this.baseURL}/create`, {
         method: "POST",
@@ -74,6 +90,23 @@ class ArticleService {
     try {
       const res = await fetch(`${this.baseURL}/search?q=${keyword}`, {
         headers: this.getHeaders(),
+      });
+
+      return this.handleResponse<IArticle[]>(res);
+    } catch (e) {
+      console.error(`Failed fetch: ${e}`);
+      return [];
+    }
+  }
+
+  public async getUnpublishedArticles(
+    query: string,
+    accessToken: string
+  ): Promise<ArticlePreview[]> {
+    try {
+      const res = await fetch(`${this.baseURL}/unpublished?${query}`, {
+        headers: this.getHeaders(accessToken),
+        credentials: "include",
       });
 
       return this.handleResponse<IArticle[]>(res);
@@ -144,10 +177,10 @@ class ArticleService {
     return res.json();
   }
 
-  private getHeaders(): HeadersInit {
+  private getHeaders(token?: string): HeadersInit {
     return {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     };
   }
 }

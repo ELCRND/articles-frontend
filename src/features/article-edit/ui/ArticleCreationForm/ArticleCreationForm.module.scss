@@ -1,12 +1,17 @@
 .form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  row-gap: rem(36);
+  row-gap: rem(48);
   column-gap: rem(68);
   padding-bottom: 200px;
 
+  @include tablet {
+    gap: rem(32);
+  }
+
   @include mobile {
     grid-template-columns: 1fr;
+    padding-bottom: rem(64);
   }
 }
 
@@ -37,5 +42,7 @@
 
   @include mobile {
     grid-column: 1 / 2;
+    height: rem(40);
+    font-size: rem(16);
   }
 }

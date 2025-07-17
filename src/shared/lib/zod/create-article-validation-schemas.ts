@@ -6,6 +6,10 @@ import {
 } from "@/entities/article/model/types";
 import { z } from "zod";
 
+const ArticleTagKeys = Object.keys(ArticleTag).filter(
+  (v): v is keyof typeof ArticleTag => isNaN(Number(v))
+);
+
 const optionalImageFileSchema = z
   .instanceof(File)
   .optional()
@@ -19,7 +23,7 @@ const optionalImageFileSchema = z
   );
 
 export const createArticleSchema = z.object({
-  articleName: z
+  title: z
     .string()
     .min(3, "Название статьи должно содержать минимум 3 символа")
     .max(50, "Название статьи не должно превышать 50 символов")
@@ -85,18 +89,27 @@ export const createArticleSchema = z.object({
       "Поддерживаются только изображения"
     ),
 
+  content: z.record(z.any()).refine(
+    (data) => {
+      return data?.content?.length > 0;
+    },
+    { message: "Содержание статьи обязательно" }
+  ),
+
   tags: z
-    .array(z.nativeEnum(ArticleTag))
+    .array(
+      z.enum(
+        ArticleTagKeys as [
+          keyof typeof ArticleTag,
+          ...(keyof typeof ArticleTag)[]
+        ]
+      )
+    )
     .min(1, "Необходимо выбрать хотя бы один тег")
     .max(5, "Можно выбрать не более 5 тегов")
-    .refine(
-      (tags) => {
-        return new Set(tags).size === tags.length;
-      },
-      {
-        message: "Теги не должны повторяться",
-      }
-    ),
+    .refine((tags) => new Set(tags).size === tags.length, {
+      message: "Теги не должны повторяться",
+    }),
 });
 
 export type CreateArticleFormData = z.infer<typeof createArticleSchema>;
